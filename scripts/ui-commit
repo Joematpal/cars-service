@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+cd modules/escape-pod-ui
+
+COMMIT=`git rev-parse --short HEAD`
+
+# check if the current commit has a matching tag
+TAG=$(git describe --exact-match --abbrev=0 --tags ${COMMIT} 2> /dev/null || true)
+
+# check for changed files (not untracked files)
+if [ -n "$(git diff --shortstat 2> /dev/null | tail -n1)" ]; then
+    COMMIT="${COMMIT}-dirty"
+fi
+
+# TODO: get the build and version from the sub module 
+
+echo "$COMMIT"

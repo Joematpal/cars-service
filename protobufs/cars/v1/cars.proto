@@ -1,0 +1,63 @@
+syntax = "proto3";
+package cars;
+option go_package = "github.com/joematpal/pkg/cars/v1:cars;v1_cars";
+
+
+service CarsService {
+    rpc CreateCar(Car) returns (Car);
+    rpc ListCars(ListCarsReq) returns (Cars);
+    rpc GetCar(CarReq) returns (Car);
+    rpc DeleteCar(CarReq) returns (Success);
+}
+
+
+message ListCarsReq {
+    CarReq query = 1;
+    Cursor Cursor = 2;
+}
+
+message Car {
+    string id = 1;
+    string make = 2;
+    string package = 3;
+    string color = 4;
+    int32 year = 5;
+    int64 mileage = 6;
+    int64 price = 7;
+    string category = 8;
+    string model = 9;
+
+    int64 created_at = 10;
+    string created_by = 11;
+    int64 updated_at = 12;
+    string updated_by = 13;
+}
+
+message CarReq {
+    string id = 1;
+}
+
+message Success {
+    int32 status = 1;
+    string message = 2;
+}
+
+message Cars {
+    repeated Car cars = 1;
+    Page page = 2;
+}
+
+message Cursor {
+    int32 size = 1;
+    int32 offset = 2;
+}
+
+// Response pointing to the next set of pages
+message Page {
+    // update for how many returned
+    int32 size = 1;
+    // Returns next offset
+    int32 offset = 2;
+    // Total number of rows
+    int32 total = 3;
+}

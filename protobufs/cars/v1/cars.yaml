@@ -1,0 +1,10 @@
+type: google.api.Service
+config_version: 3
+
+http:
+    rules:
+      - selector: cars.CarsService.CreateCar
+        post: /api/v1/cars/{id}
+        produces: application/json
+        consumes: application/json
+        body: "*"

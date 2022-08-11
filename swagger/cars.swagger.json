@@ -1,0 +1,219 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "cars.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "CarsService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/cars/{id}": {
+      "post": {
+        "operationId": "CarsService_CreateCar",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/carsCar"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "make": {
+                  "type": "string"
+                },
+                "package": {
+                  "type": "string"
+                },
+                "color": {
+                  "type": "string"
+                },
+                "year": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "mileage": {
+                  "type": "string",
+                  "format": "int64"
+                },
+                "price": {
+                  "type": "string",
+                  "format": "int64"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "model": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "CarsService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "carsCar": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "make": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "mileage": {
+          "type": "string",
+          "format": "int64"
+        },
+        "price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "category": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        }
+      }
+    },
+    "carsCarReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "carsCars": {
+      "type": "object",
+      "properties": {
+        "cars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/carsCar"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/carsPage"
+        }
+      }
+    },
+    "carsCursor": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "carsPage": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "title": "update for how many returned"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Returns next offset"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Total number of rows"
+        }
+      },
+      "title": "Response pointing to the next set of pages"
+    },
+    "carsSuccess": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
