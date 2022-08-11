@@ -5,9 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/joematpal/cars-service/internal/logging"
 	cars "github.com/joematpal/cars-service/pkg/cars/v1"
-	sqlp "github.com/joematpal/go-sql/v2"
 )
 
 func TestDB_CreateCar(t *testing.T) {
@@ -19,6 +17,7 @@ func TestDB_CreateCar(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
+		db      *DB
 		want    *cars.Car
 		wantErr bool
 	}{
@@ -27,7 +26,7 @@ func TestDB_CreateCar(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 
-			got, err := db.CreateCar(tt.args.ctx, tt.args.req)
+			got, err := tt.db.CreateCar(tt.args.ctx, tt.args.req)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("DB.CreateCar() error = %v, wantErr %v", err, tt.wantErr)
 				return
